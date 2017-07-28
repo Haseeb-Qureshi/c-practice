@@ -11,6 +11,7 @@ char** readLines(FILE* readFile) {
       free(buf);
       break;
     }
+    buf[strlen(buf) - 1] = 0;
     lines[i] = buf;
     i++;
   }
@@ -24,7 +25,7 @@ void freeLines(char** lines) {
     free(lines[i]);
     i++;
   }
-  free(*lines);
+  free(lines);
 }
 
 void reverseLine(char* line) {
@@ -69,10 +70,12 @@ int main() {
   printf("Please enter a file to open!");
   char readFileName[255];
   fgets(readFileName, 255, stdin);
+  readFileName[strlen(readFileName) - 1] = 0;
 
   printf("And where do you want me to write to?");
   char writeFileName[255];
   fgets(writeFileName, 255, stdin);
+  writeFileName[strlen(writeFileName) - 1] = 0;
 
   FILE* readFile = fopen(readFileName, "r");
   char** lines = readLines(readFile);
